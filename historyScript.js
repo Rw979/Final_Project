@@ -14,7 +14,7 @@ let vlogCollection = [
     "category": "stage",
     "id": "beforevlog",
     "description": "The concept of vlogging can be traced back to the days of blogging in the early 1990s. “The word vlog is short for “video log” or “video blogging” which gives a hint as to what came before the vlog: blogging” (Sanchez). Blogs became more common with the introduction of easy HTML text editors like Open Diary, Live Journal, and Blogger in 1999, paving the way for vlogging.",
-    "image": ""
+    "image": "https://rw979.github.io/Final_Project/genesis.jpeg"
   },
   {
     "itemTitle": "Inception",
@@ -39,35 +39,35 @@ let vlogCollection = [
     "id": "widespread",
     "secondTitle":"Before",
     "description": "The advent of smartphones equipped with high-quality cameras made it easier for people to create and share vlogs, contributing to the medium's rapid growth. Vloggers began building large online communities, sharing various aspects of life. This period saw the rise of different genres of vlogs, from daily life to specialized topics. Vlogging gained mainstream media attention, with prominent media outlets covering notable vloggers and their impact on culture and society. Vloggers started to professionalize their content, with some earning significant income through ad revenue, sponsorships, and merchandise, further legitimizing vlogging as a career.",
-    "image": ""
+    "image": "https://rw979.github.io/Final_Project/maturation.jpeg"
   },
   {
     "itemTitle": "Nelson Sullivan",
     "category": "art",
     "id": "NS",
     "description": "Known for recording and sharing videos of his life in New York during the 1980s. His videos, initially preserved on videotapes and later digitized for the internet, offer a unique perspective on the culture and nightlife of New York at that time. ‘Recording his experiences like video diaries, his work also clearly foreshadows more contemporary forms of DIY videos. Queer historian and archivist Robert Coddington notes “He was the first vlogger when you look at it’ (Colucci). Sullivan also frequently turned the camera into his face, which is recognized as a predecessor of current selfie posts.",
-    "image": ""
+    "image": "https://rw979.github.io/Final_Project/nelsonsullivan.jpeg"
   },
   {
     "itemTitle": "Jennifer Ringley",
     "category": "art",
     "id": "JR",
     "description": "A pioneer in live broadcasting of personal life, known for “JenniCam”. Starting in 1996, Jennifer broadcast almost every aspect of her life from her college dorm room for seven years until she defunct her website and avoided to be shown on social media. Her works setting a precedent for real-time personal life broadcasting and exploring privacy, performance, and authenticity.",
-    "image": ""
+    "image": "https://rw979.github.io/Final_Project/jennicam.webp"
   },
   {
     "itemTitle": "Anna Voog",
     "category": "art",
     "id": "AV",
     "description": "An artist and musician who started broadcasting her life 24/7 on her website 'Anacam' for 12 years since 1997. Her work broke traditional art boundaries, exploring new self-expression ways through the internet. In Heather Saul’s interview, Anna said ‘All anyone ever wanted was for me to wave at them on the camera. They'd always say that, wave at me, can you see me? It was about people connecting, you know. It was so exciting.’",
-    "image": ""
+    "image": "https://rw979.github.io/Final_Project/"
   },
   {
     "itemTitle": "Josh Harris",
     "category": "art",
     "id": "JH",
     "description": "An internet entrepreneur and artist best known for his work 'Quiet: We Live in Public'. This project was a social experiment conducted in New York in 1999, where over 100 people lived in a basement with their lives being broadcast online 24/7. The experiment aimed to explore the relationship between privacy and technology, foreshadowing the later era of social media. In year 2000, ‘he announced his We Live in Public web project, for which he rigged up his opulent Broadway loft with dozens of cameras, committing himself and his girlfriend Tanya Corrin to 'live in public' for 100 days’ (Smith).",
-    "image": ""
+    "image": "https://rw979.github.io/Final_Project/joshharris.jpeg"
   },
   {
     "itemTitle": "",
