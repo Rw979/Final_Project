@@ -3,8 +3,8 @@ let mainContainer;
 let mainContainer2;
 let mainContainerLeftElement;
 let mainContainerRightElement;
-let mainContainerLeft2Element;
-let mainContainerRight2Element;
+// let mainContainerLeft2Element;
+// let mainContainerRight2Element;
 let stageMenuElement;
 let artMenuElement;
 
@@ -21,8 +21,7 @@ let vlogCollection = [
     "category": "stage",
     "id": "firstvlog",
     "description": "On January 2, 2000, Adam Kontras posted the very first vlog. In this vlog, he recorded his journey to Los Angeles for career purposes and included a brief video clip showing how he discreetly brought his dog into a hotel that didn't allow pets. Initially, the video was posted for Adam’s friends and family.",
-    "image": ""
-    /*https://www.youtube.com/watch?v=Op65qkWxqBY*/
+    "videoID": "Op65qkWxqBY"
     },
   {
     "itemTitle": "Popularization",
@@ -30,8 +29,7 @@ let vlogCollection = [
     "id": "youtube",
     "secondTitle":"Before",
     "description": "In April 2005, Jawed Karim, co-founder of YouTube, uploaded the platform's initial vlog titled 'Me at the zoo' on his 'jawed' channel. This video, characterized by its simple, everyday style and unembellished aesthetic, set a precedent for the kind of unpolished vlogging that would typify the content produced by many YouTube creators.",
-    "image": ""
-    /*https://www.youtube.com/watch?v=jNQXAC9IVRw*/
+    "videoID" : "jNQXAC9IVRw"
     },
   {
     "itemTitle": "Maturation",
@@ -60,7 +58,7 @@ let vlogCollection = [
     "category": "art",
     "id": "AV",
     "description": "An artist and musician who started broadcasting her life 24/7 on her website 'Anacam' for 12 years since 1997. Her work broke traditional art boundaries, exploring new self-expression ways through the internet. In Heather Saul’s interview, Anna said ‘All anyone ever wanted was for me to wave at them on the camera. They'd always say that, wave at me, can you see me? It was about people connecting, you know. It was so exciting.’",
-    "image": "https://rw979.github.io/Final_Project/"
+    "image": "https://rw979.github.io/Final_Project/annavoog.jpeg"
   },
   {
     "itemTitle": "Josh Harris",
@@ -85,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
   mainContainerRightElement = document.getElementById("mainContainerRight");
   mainContainerLeftElement = document.getElementById("mainContainerLeft");
   mainContainer2Element = document.getElementById("mainContainer2");
-  mainContainerRight2Element = document.getElementById("mainContainerRight2");
-  mainContainerLeft2Element = document.getElementById("mainContainerLeft2");
+  // mainContainerRight2Element = document.getElementById("mainContainerRight2");
+  // mainContainerLeft2Element = document.getElementById("mainContainerLeft2");
   stageMenuElement = document.getElementById("stageMenu");
   artMenuElement = document.getElementById("artMenu");
 
@@ -157,7 +155,8 @@ function createVlogPreview(incomingJSON){
         mainContainerRightElement.appendChild(newPreviewLink);
     }
      if (incomingJSON["category"] === "art") {
-        mainContainerLeft2Element.appendChild(newPreviewLink);
+        // mainContainerLeft2Element.appendChild(newPreviewLink);
+      mainContainerRightElement.appendChild(newPreviewLink);
     }            
 }
 
@@ -170,6 +169,15 @@ function createVlogPage(incomingJSON) {
 
     let newDescription = document.createElement('p');
     newDescription.innerText = incomingJSON.description;
+
+    if ((incomingJSON['videoID'] != "") && (incomingJSON['videoID'] != null)) {
+      let newVideoEmbed = document.createElement('IFRAME');
+      let embeddedString = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
+      console.log("EMBED LINK: " + embeddedString);
+      newVideoEmbed.src = embeddedString;
+      newVideoEmbed.height = "300";
+      newDiv.appendChild(newVideoEmbed);
+    }
 
     let newImage = document.createElement('img');
     newImage.src = incomingJSON.image;
@@ -195,7 +203,8 @@ function createVlogPage(incomingJSON) {
     } 
 
      if (incomingJSON["category"] === "art") {
-        mainContainerLeft2Element.appendChild(newDiv);
+        // mainContainerLeft2Element.appendChild(newDiv);
+        mainContainerRightElement.appendChild(newDiv);
     }    
 
 }

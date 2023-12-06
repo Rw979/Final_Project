@@ -170,8 +170,13 @@
 }
 
 
+#mainContainerRight > a {
+  width: 60%;
+}
+
 #mainContainerRight img {
-  max-height: 50%;
+  width: 100%;
+/*  max-height: 50vh;*/
 }
 
 
