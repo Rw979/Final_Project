@@ -3,10 +3,10 @@ let mainContainer;
 let mainContainer2;
 let mainContainerLeftElement;
 let mainContainerRightElement;
-// let mainContainerLeft2Element;
-// let mainContainerRight2Element;
 let stageMenuElement;
 let artMenuElement;
+let swiperContainer;
+let swiperWrapper;
 
 let vlogCollection = [
   {
@@ -14,7 +14,7 @@ let vlogCollection = [
     "category": "stage",
     "id": "beforevlog",
     "description": "The concept of vlogging can be traced back to the days of blogging in the early 1990s. “The word vlog is short for “video log” or “video blogging” which gives a hint as to what came before the vlog: blogging” (Sanchez). Blogs became more common with the introduction of easy HTML text editors like Open Diary, Live Journal, and Blogger in 1999, paving the way for vlogging.",
-    "image": "https://rw979.github.io/Final_Project/genesis.jpeg"
+    "image": "https://rw979.github.io/Final_Project/genesis.jpeg",
   },
   {
     "itemTitle": "Inception",
@@ -83,10 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
   mainContainerRightElement = document.getElementById("mainContainerRight");
   mainContainerLeftElement = document.getElementById("mainContainerLeft");
   mainContainer2Element = document.getElementById("mainContainer2");
-  // mainContainerRight2Element = document.getElementById("mainContainerRight2");
-  // mainContainerLeft2Element = document.getElementById("mainContainerLeft2");
   stageMenuElement = document.getElementById("stageMenu");
   artMenuElement = document.getElementById("artMenu");
+  swiperContainer = document.getElementById('.swiper');
+  swiperWrapper = document.querySelector('.swiper-wrapper');
 
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
@@ -146,18 +146,39 @@ function createVlogPreview(incomingJSON){
 	newPreviewTitle.innerText = incomingJSON["itemTitle"];
     newPreviewElement.appendChild(newPreviewTitle);  
 
-    let newPreviewThumbnail = document.createElement("IMG");
-    newPreviewThumbnail.classList.add("thumbnail");
-    newPreviewThumbnail.src = incomingJSON["image"];
-    newPreviewElement.appendChild(newPreviewThumbnail);  
+    /* PROF NOTE: Only add Image if the entry has one */
+    if ((incomingJSON['image'] != "") && (incomingJSON['image'] != null)) {
+        let newPreviewThumbnail = document.createElement("IMG");
+        newPreviewThumbnail.classList.add("thumbnail");
+        newPreviewThumbnail.src = incomingJSON["image"];
+        newPreviewElement.appendChild(newPreviewThumbnail);  
+    }
 
-     if (incomingJSON["category"] === "stage") {
+/* PROF NOTE: Only add Video if the entry has one */
+    if ((incomingJSON['videoID'] != "") && (incomingJSON['videoID'] != null)) {
+
+        let newResponsiveEmbedContainer = document.createElement('DIV');
+        newResponsiveEmbedContainer.classList.add('embed-container');
+
+        let newVideoEmbed = document.createElement('IFRAME');
+        let embeddedString = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
+        console.log("EMBED LINK: " + embeddedString);
+        newVideoEmbed.src = embeddedString;
+        // newVideoEmbed.height = "300"; // PROF NOTE: Not needed with new responsive embed container
+        // PROF NOTE: Adding additional tag attributes
+        newVideoEmbed.setAttribute('frameborder', '0');
+
+        newResponsiveEmbedContainer.appendChild(newVideoEmbed); // PROF NOTE: Adding to responsive container first
+        newPreviewElement.appendChild(newResponsiveEmbedContainer);
+    }
+
+    if (incomingJSON["category"] === "stage") {
         mainContainerRightElement.appendChild(newPreviewLink);
     }
-     if (incomingJSON["category"] === "art") {
-        // mainContainerLeft2Element.appendChild(newPreviewLink);
-      mainContainerRightElement.appendChild(newPreviewLink);
-    }            
+    if (incomingJSON["category"] === "art") {
+// mainContainerLeft2Element.appendChild(newPreviewLink);
+        mainContainerRightElement.appendChild(newPreviewLink);
+    }     
 }
 
 
@@ -170,32 +191,99 @@ function createVlogPage(incomingJSON) {
     let newDescription = document.createElement('p');
     newDescription.innerText = incomingJSON.description;
 
+    /* PROF NOTE: Only add Video if the entry has one */
     if ((incomingJSON['videoID'] != "") && (incomingJSON['videoID'] != null)) {
-      let newVideoEmbed = document.createElement('IFRAME');
-      let embeddedString = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
-      console.log("EMBED LINK: " + embeddedString);
-      newVideoEmbed.src = embeddedString;
-      newVideoEmbed.height = "300";
-      newDiv.appendChild(newVideoEmbed);
+
+        let newResponsiveEmbedContainer = document.createElement('DIV');
+        newResponsiveEmbedContainer.classList.add('embed-container');
+
+        let newVideoEmbed = document.createElement('IFRAME');
+        let embeddedString = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
+        console.log("EMBED LINK: " + embeddedString);
+        newVideoEmbed.src = embeddedString;
+        // newVideoEmbed.height = "300"; // PROF NOTE: Not needed with new responsive embed container
+        // PROF NOTE: Adding additional tag attributes
+        newVideoEmbed.setAttribute('frameborder', '0');
+
+        newResponsiveEmbedContainer.appendChild(newVideoEmbed); // PROF NOTE: Adding to responsive container first
+        newDiv.appendChild(newResponsiveEmbedContainer);
     }
 
-    let newImage = document.createElement('img');
-    newImage.src = incomingJSON.image;
-    newImage.alt = incomingJSON.itemTitle;
+    if ((incomingJSON['image'] != "") && (incomingJSON['image'] != "")) {
+        let newImage = document.createElement('img');
+        newImage.src = incomingJSON.image;
+        newImage.alt = incomingJSON.itemTitle;
+        newDiv.appendChild(newImage);
+    }
+
 
     let newTitle2 = document.createElement('h3');
-            newTitle2.innerText = incomingJSON.secondTitle;
+    newTitle2.innerText = incomingJSON.secondTitle;
 
     if (incomingJSON.category === "stage") {
+        let newImage = document.createElement('img');
         newDiv.appendChild(newImage);
         newDiv.appendChild(newTitle);
         newDiv.appendChild(newDescription);
+
+
+        /* PROF NOTE: Your content currently only has one image at most- you would need an array of images so this is causing problems. It also needs to create new IMG elements for each image */
+        // for (let imgUrl of incomingJSON.image) {
+        //  let slide = document.createElement('div');
+        //  slide.className = 'swiper-slide';
+
+        //  let img = document.createElement('img');
+        //  img.src = imgUrl;
+        //  slide.appendChild(img);
+        //  swiperWrapper.appendChild(slide);
+        // }
+
+        
+
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
     } 
 
     if (incomingJSON.category === "art") {
-        newDiv.appendChild(newImage);
+        //newDiv.appendChild(newImage);
         newDiv.appendChild(newTitle);
         newDiv.appendChild(newDescription);
+
+        for (let imgUrl of incomingJSON.image) {
+            let slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+
+            let img = document.createElement('img');
+            img.src = imgUrl;
+            slide.appendChild(img);
+            //slide.appendChild(newVideoEmbed);
+            swiperWrapper.appendChild(slide);
+        }
+
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
     }
         
      if (incomingJSON["category"] === "stage") {
