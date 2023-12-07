@@ -21,7 +21,7 @@ let vlogCollection = [
     "category": "stage",
     "id": "firstvlog",
     "description": "On January 2, 2000, Adam Kontras posted the very first vlog. In this vlog, he recorded his journey to Los Angeles for career purposes and included a brief video clip showing how he discreetly brought his dog into a hotel that didn't allow pets. Initially, the video was posted for Adam’s friends and family.",
-    "image":"https://rw979.github.io/Final_Project/08OnTech-YouTube-superJumbo.jpg",
+    "image":"https://rw979.github.io/Final_Project/1.png",
     "videoID": "Op65qkWxqBY"
     },
   {
@@ -30,6 +30,7 @@ let vlogCollection = [
     "id": "youtube",
     "secondTitle":"Before",
     "description": "In April 2005, Jawed Karim, co-founder of YouTube, uploaded the platform's initial vlog titled 'Me at the zoo' on his 'jawed' channel. This video, characterized by its simple, everyday style and unembellished aesthetic, set a precedent for the kind of unpolished vlogging that would typify the content produced by many YouTube creators.",
+    "image":"https://rw979.github.io/Final_Project/08OnTech-YouTube-superJumbo.jpg",
     "videoID" : "jNQXAC9IVRw"
     },
   {
@@ -38,21 +39,21 @@ let vlogCollection = [
     "id": "widespread",
     "secondTitle":"Before",
     "description": "The advent of smartphones equipped with high-quality cameras made it easier for people to create and share vlogs, contributing to the medium's rapid growth. Vloggers began building large online communities, sharing various aspects of life. This period saw the rise of different genres of vlogs, from daily life to specialized topics. Vlogging gained mainstream media attention, with prominent media outlets covering notable vloggers and their impact on culture and society. Vloggers started to professionalize their content, with some earning significant income through ad revenue, sponsorships, and merchandise, further legitimizing vlogging as a career.",
-    "image": "https://rw979.github.io/Final_Project/maturation.jpeg"
+    "image": "https://rw979.github.io/Final_Project/IMG_3224.JPG"
   },
   {
     "itemTitle": "Nelson Sullivan",
     "category": "art",
     "id": "NS",
     "description": "Known for recording and sharing videos of his life in New York during the 1980s. His videos, initially preserved on videotapes and later digitized for the internet, offer a unique perspective on the culture and nightlife of New York at that time. ‘Recording his experiences like video diaries, his work also clearly foreshadows more contemporary forms of DIY videos. Queer historian and archivist Robert Coddington notes “He was the first vlogger when you look at it’ (Colucci). Sullivan also frequently turned the camera into his face, which is recognized as a predecessor of current selfie posts.",
-    "image": "https://rw979.github.io/Final_Project/nelsonsullivan.jpeg"
+    "image": ["https://rw979.github.io/Final_Project/IMG_3219.JPG", "https://rw979.github.io/Final_Project/IMG_3235.JPG", "https://rw979.github.io/Final_Project/IMG_3236.JPG"]
   },
   {
     "itemTitle": "Jennifer Ringley",
     "category": "art",
     "id": "JR",
     "description": "A pioneer in live broadcasting of personal life, known for “JenniCam”. Starting in 1996, Jennifer broadcast almost every aspect of her life from her college dorm room for seven years until she defunct her website and avoided to be shown on social media. Her works setting a precedent for real-time personal life broadcasting and exploring privacy, performance, and authenticity.",
-    "image": "https://rw979.github.io/Final_Project/jennicam.webp"
+    "image": ["https://rw979.github.io/Final_Project/IMG_3221.JPG", "https://rw979.github.io/Final_Project/IMG_3231.JPG"]
   },
   {
     "itemTitle": "Anna Voog",
@@ -229,15 +230,15 @@ function createVlogPage(incomingJSON) {
 
 
         /* PROF NOTE: Your content currently only has one image at most- you would need an array of images so this is causing problems. It also needs to create new IMG elements for each image */
-        // for (let imgUrl of incomingJSON.image) {
-        //  let slide = document.createElement('div');
-        //  slide.className = 'swiper-slide';
+         for (let imgUrl of incomingJSON.image) {
+          let slide = document.createElement('div');
+          slide.className = 'swiper-slide';
 
-        //  let img = document.createElement('img');
-        //  img.src = imgUrl;
-        //  slide.appendChild(img);
-        //  swiperWrapper.appendChild(slide);
-        // }
+         let img = document.createElement('img');
+          img.src = imgUrl;
+          slide.appendChild(img);
+          swiperWrapper.appendChild(slide);
+         }
 
         
 
