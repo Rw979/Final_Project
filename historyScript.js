@@ -21,6 +21,7 @@ let vlogCollection = [
     "category": "stage",
     "id": "firstvlog",
     "description": "On January 2, 2000, Adam Kontras posted the very first vlog. In this vlog, he recorded his journey to Los Angeles for career purposes and included a brief video clip showing how he discreetly brought his dog into a hotel that didn't allow pets. Initially, the video was posted for Adam’s friends and family.",
+    "image":"https://rw979.github.io/Final_Project/08OnTech-YouTube-superJumbo.jpg",
     "videoID": "Op65qkWxqBY"
     },
   {
