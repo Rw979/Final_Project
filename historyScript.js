@@ -60,21 +60,14 @@ let vlogCollection = [
     "category": "art",
     "id": "AV",
     "description": "An artist and musician who started broadcasting her life 24/7 on her website 'Anacam' for 12 years since 1997. Her work broke traditional art boundaries, exploring new self-expression ways through the internet. In Heather Saul’s interview, Anna said ‘All anyone ever wanted was for me to wave at them on the camera. They'd always say that, wave at me, can you see me? It was about people connecting, you know. It was so exciting.’",
-    "image": "https://rw979.github.io/Final_Project/annavoog.jpeg"
+    "image": ["https://rw979.github.io/Final_Project/IMG_3220.JPG","https://rw979.github.io/Final_Project/IMG_3241.JPG"]
   },
   {
     "itemTitle": "Josh Harris",
     "category": "art",
     "id": "JH",
     "description": "An internet entrepreneur and artist best known for his work 'Quiet: We Live in Public'. This project was a social experiment conducted in New York in 1999, where over 100 people lived in a basement with their lives being broadcast online 24/7. The experiment aimed to explore the relationship between privacy and technology, foreshadowing the later era of social media. In year 2000, ‘he announced his We Live in Public web project, for which he rigged up his opulent Broadway loft with dozens of cameras, committing himself and his girlfriend Tanya Corrin to 'live in public' for 100 days’ (Smith).",
-    "image": "https://rw979.github.io/Final_Project/joshharris.jpeg"
-  },
-  {
-    "itemTitle": "",
-    "category": "art",
-    "id": "",
-    "description": "",
-    "image": ""
+    "image": ["https://rw979.github.io/Final_Project/IMG_3223.JPG", "https://rw979.github.io/Final_Project/IMG_3232.JPG", "https://rw979.github.io/Final_Project/IMG_3233.JPG"]
   }
 ];
 
@@ -189,91 +182,42 @@ function createVlogPage(incomingJSON) {
 
     let newTitle = document.createElement('h2');
     newTitle.innerText = incomingJSON.itemTitle;
+    newDiv.appendChild(newTitle);
 
     let newDescription = document.createElement('p');
     newDescription.innerText = incomingJSON.description;
+    newDiv.appendChild(newDescription);
 
-    /* PROF NOTE: Only add Video if the entry has one */
-    if ((incomingJSON['videoID'] != "") && (incomingJSON['videoID'] != null)) {
-
-        let newResponsiveEmbedContainer = document.createElement('DIV');
-        newResponsiveEmbedContainer.classList.add('embed-container');
-
+    
+    if (incomingJSON['videoID'] != "" && incomingJSON['videoID'] != null) {
         let newVideoEmbed = document.createElement('IFRAME');
-        let embeddedString = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
-        console.log("EMBED LINK: " + embeddedString);
-        newVideoEmbed.src = embeddedString;
-        // newVideoEmbed.height = "300"; // PROF NOTE: Not needed with new responsive embed container
-        // PROF NOTE: Adding additional tag attributes
+        newVideoEmbed.src = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
         newVideoEmbed.setAttribute('frameborder', '0');
-
-        newResponsiveEmbedContainer.appendChild(newVideoEmbed); // PROF NOTE: Adding to responsive container first
-        newDiv.appendChild(newResponsiveEmbedContainer);
+        newDiv.appendChild(newVideoEmbed);
     }
 
-    if ((incomingJSON['image'] != "") && (incomingJSON['image'] != "")) {
-        let newImage = document.createElement('img');
-        newImage.src = incomingJSON.image;
-        newImage.alt = incomingJSON.itemTitle;
-        newDiv.appendChild(newImage);
-    }
+    if (incomingJSON.category === "stage" || incomingJSON.category === "art") {
+        if (Array.isArray(incomingJSON['image']) && incomingJSON['image'].length > 0) {
+            for (let imgUrl of incomingJSON.image) {
+                let slide = document.createElement('div');
+                slide.className = 'swiper-slide';
 
-
-    let newTitle2 = document.createElement('h3');
-    newTitle2.innerText = incomingJSON.secondTitle;
-
-    if (incomingJSON.category === "stage") {
-        let newImage = document.createElement('img');
-        newDiv.appendChild(newImage);
-        newDiv.appendChild(newTitle);
-        newDiv.appendChild(newDescription);
-
-
-        /* PROF NOTE: Your content currently only has one image at most- you would need an array of images so this is causing problems. It also needs to create new IMG elements for each image */
-         for (let imgUrl of incomingJSON.image) {
-          let slide = document.createElement('div');
-          slide.className = 'swiper-slide';
-
-         let img = document.createElement('img');
-          img.src = imgUrl;
-          slide.appendChild(img);
-          swiperWrapper.appendChild(slide);
-         }
-
-        
-
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-        });
-    } 
-
-    if (incomingJSON.category === "art") {
-        //newDiv.appendChild(newImage);
-        newDiv.appendChild(newTitle);
-        newDiv.appendChild(newDescription);
-
-        for (let imgUrl of incomingJSON.image) {
+                let img = document.createElement('img');
+                img.src = imgUrl;
+                slide.appendChild(img);
+                swiperWrapper.appendChild(slide);
+            }
+        } else if (typeof incomingJSON['image'] === 'string' && incomingJSON['image'] !== "") {
             let slide = document.createElement('div');
             slide.className = 'swiper-slide';
 
             let img = document.createElement('img');
-            img.src = imgUrl;
+            img.src = incomingJSON.image;
             slide.appendChild(img);
-            //slide.appendChild(newVideoEmbed);
             swiperWrapper.appendChild(slide);
         }
 
-        const swiper = new Swiper('.swiper', {
+        new Swiper('.swiper', {
             loop: true,
             pagination: {
                 el: '.swiper-pagination',
@@ -287,15 +231,10 @@ function createVlogPage(incomingJSON) {
             },
         });
     }
-        
-     if (incomingJSON["category"] === "stage") {
-        mainContainerRightElement.appendChild(newDiv);
-    } 
 
-     if (incomingJSON["category"] === "art") {
-        // mainContainerLeft2Element.appendChild(newDiv);
+    if (incomingJSON["category"] === "stage") {
+        mainContainerRightElement.appendChild(newDiv);
+    } else if (incomingJSON["category"] === "art") {
         mainContainerRightElement.appendChild(newDiv);
     }    
-
 }
-
