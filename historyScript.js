@@ -14,7 +14,7 @@ let vlogCollection = [
     "category": "stage",
     "id": "beforevlog",
     "description": "The concept of vlogging can be traced back to the days of blogging in the early 1990s. “The word vlog is short for “video log” or “video blogging” which gives a hint as to what came before the vlog: blogging” (Sanchez). Blogs became more common with the introduction of easy HTML text editors like Open Diary, Live Journal, and Blogger in 1999, paving the way for vlogging.",
-    "image": "https://rw979.github.io/Final_Project/genesis.jpeg",
+    "image": "https://rw979.github.io/Final_Project/IMG_3222.JPG",
   },
   {
     "itemTitle": "Inception",
