@@ -188,11 +188,13 @@ function createVlogPage(incomingJSON) {
     newDescription.innerText = incomingJSON.description;
     newDiv.appendChild(newDescription);
 
-    
-    if (incomingJSON['videoID'] != "" && incomingJSON['videoID'] != null) {
+    if (incomingJSON['videoID'] != null && incomingJSON['videoID'] != "") {
         let newVideoEmbed = document.createElement('IFRAME');
         newVideoEmbed.src = "https://www.youtube.com/embed/" + incomingJSON['videoID'];
         newVideoEmbed.setAttribute('frameborder', '0');
+        newVideoEmbed.setAttribute('allowfullscreen', '');
+        newVideoEmbed.style.width = '100%';
+        newVideoEmbed.style.height = '500px'; 
         newDiv.appendChild(newVideoEmbed);
     }
 
@@ -216,6 +218,7 @@ function createVlogPage(incomingJSON) {
             slide.appendChild(img);
             swiperWrapper.appendChild(slide);
         }
+
 
         new Swiper('.swiper', {
             loop: true,
